@@ -25,6 +25,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_LOGIN: Aspirin0000
+          ZHOULI_VIDEO_PLAYS: "380k+"
+          ZHOULI_ACTIVE_USERS: "250k+"
+          ZHOULI_LIKES: "50k+"
 
       - name: Commit refreshed cards
         run: |

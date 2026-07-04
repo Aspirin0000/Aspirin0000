@@ -21,10 +21,16 @@ const languageColors = {
   "TypeScript": "#3178C6",
 };
 
+const zhouliProjectSocial = {
+  plays: process.env.ZHOULI_VIDEO_PLAYS || "380k+",
+  users: process.env.ZHOULI_ACTIVE_USERS || "250k+",
+  likes: process.env.ZHOULI_LIKES || "50k+",
+};
+
 const zhouliProjectMeta = {
   title: "合乎周礼 / Zhouli Translator",
   subtitle: "AI-era Chinese style translator · prompt craft · image export · Cloudflare deploy",
-  impact: "Social impact: 200k+ plays · 20k+ likes · 30k+ engaged users",
+  impact: `${zhouliProjectSocial.plays} 视频播放 · ${zhouliProjectSocial.users} 用户使用 · ${zhouliProjectSocial.likes} 点赞`,
 };
 
 async function github(path) {
