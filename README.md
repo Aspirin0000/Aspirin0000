@@ -2,6 +2,36 @@
   <img src="./assets/profile-masthead-air.svg" alt="Aspirin0000 - SJTU Software Engineering 2027" />
 </p>
 
+## 合乎周礼 / Zhouli Translator
+
+<p align="center">
+  <strong>把寻常的话，翻译成一本正经、略显荒唐、但又有礼有据的周礼白话翻译腔。</strong>
+</p>
+
+<p align="center">
+  <a href="https://hehuzhouli.com">在线体验</a>
+  ·
+  <a href="https://github.com/Aspirin0000/zhouli-translator#quick-start">快速开始</a>
+  ·
+  <a href="https://github.com/Aspirin0000/zhouli-translator#speak-zhouli-skill">下载 Skill</a>
+  ·
+  <a href="https://github.com/Aspirin0000/zhouli-translator#deployment">部署</a>
+</p>
+
+<p align="center">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-111111?style=flat-square">
+  <img alt="Official" src="https://img.shields.io/badge/official-hehuzhouli.com-8B1E1E?style=flat-square">
+  <a href="https://github.com/Aspirin0000/zhouli-translator">
+    <img alt="Official GitHub repository" src="https://img.shields.io/badge/GitHub-official_repo-181717?style=flat-square&logo=github">
+  </a>
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white">
+  <img alt="React" src="https://img.shields.io/badge/React-19-149ECA?style=flat-square&logo=react&logoColor=white">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Cloudflare Workers" src="https://img.shields.io/badge/Cloudflare-Workers-F38020?style=flat-square&logo=cloudflareworkers&logoColor=white">
+</p>
+
+<br />
+
 ## About Me
 
 **Hi, I'm Hebing** — I build reliable systems with a system-first mindset.  
