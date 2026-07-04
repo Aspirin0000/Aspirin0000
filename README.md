@@ -4,17 +4,12 @@
 
 ## About Me
 
-### Hi, I'm Hebing — I build **reliable software with a system-first mindset**.  
+**Hi, I'm Hebing** — I build reliable systems with a system-first mindset.  
 I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backend systems, API design, and deployment.
 
-### Core strengths
-system architecture, requirements modeling, clean interfaces, scalable data flow.  
-
-### Technical stack
-C++ / Go / TypeScript with practical AI + frontend integration experience.  
-
-### Featured work
-`合乎周礼` — turning AI translation ideas into a production-friendly product.
+**Core strengths:** architecture design, requirements modeling, clean interfaces, scalable data flow.  
+**Technical base:** C++ / Go / TypeScript, with practical AI + frontend integration experience.  
+**Featured:** `合乎周礼` — an AI translation project with production-minded delivery.
 
 <br />
 
