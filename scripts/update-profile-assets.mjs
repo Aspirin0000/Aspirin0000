@@ -153,6 +153,6 @@ ${rows}
 
 const data = await collect();
 await mkdir("assets", { recursive: true });
-await writeFile("assets/github-stats.svg", githubStatsSvg(data));
-await writeFile("assets/top-langs.svg", topLanguagesSvg(data));
+await writeFile("assets/activity-signal.svg", githubStatsSvg(data));
+await writeFile("assets/language-mix.svg", topLanguagesSvg(data));
 console.log(`Generated profile cards for ${login} at ${data.generatedAt}`);
