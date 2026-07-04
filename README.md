@@ -18,8 +18,6 @@ I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backen
 **Technical base:** C++ / Go / TypeScript, with practical AI + frontend integration experience.  
 **Featured:** `合乎周礼` — an AI translation project with production-minded delivery, gaining **hundreds of thousands of views** and **tens of thousands of likes** on social platforms, with **tens of thousands of users** engaged.
 
-<br />
-
 ## Tech I Use
 
 <p>
@@ -43,13 +41,9 @@ I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backen
   ...  
 </p>
 
-<br />
-
 <p align="center">
   <img src="./assets/zhouli-spotlight-minimal.svg" alt="合乎周礼 / Zhouli Translator" />
 </p>
-
-<br />
 
 <p align="center">
   <img width="49%" src="./assets/activity-signal.svg" alt="Aspirin0000 GitHub stats" />
