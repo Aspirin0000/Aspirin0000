@@ -3,7 +3,7 @@ name: Update profile assets
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 18 * * *"
+    - cron: "17 * * * *"
 
 permissions:
   contents: write
