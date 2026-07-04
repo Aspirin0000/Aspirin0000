@@ -1,0 +1,17 @@
+<svg width="1000" height="158" viewBox="0 0 1000 158" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">About Hebing</title>
+  <desc id="desc">A friendly introduction from Hebing.</desc>
+  <defs>
+    <linearGradient id="accent" x1="36" y1="28" x2="964" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0969DA"/>
+      <stop offset="0.5" stop-color="#8250DF"/>
+      <stop offset="1" stop-color="#BF3989"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="999" height="157" rx="14" fill="#FFFFFF" stroke="#D0D7DE"/>
+  <path d="M36 28H964" stroke="url(#accent)" stroke-width="3" stroke-linecap="round"/>
+  <text x="36" y="64" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="650">ABOUT ME</text>
+  <text x="36" y="99" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="700">Hi, I'm Hebing.</text>
+  <text x="36" y="126" fill="#3F4B5B" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17">I like taking slightly strange ideas seriously, turning them into small usable tools,</text>
+  <text x="36" y="148" fill="#3F4B5B" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17">and rebuilding the parts I do not understand yet.</text>
+</svg>
