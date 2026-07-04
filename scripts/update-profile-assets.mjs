@@ -30,7 +30,7 @@ const zhouliProjectSocial = {
 const zhouliProjectMeta = {
   title: "合乎周礼 / Zhouli Translator",
   subtitle: "AI-era Chinese style translator · prompt craft · image export · Cloudflare deploy",
-  impact: `${zhouliProjectSocial.plays} 视频播放 · ${zhouliProjectSocial.users} 用户使用 · ${zhouliProjectSocial.likes} 点赞`,
+  impact: `${zhouliProjectSocial.plays} video plays · ${zhouliProjectSocial.users} active users · ${zhouliProjectSocial.likes} likes`,
 };
 
 async function github(path) {
