@@ -143,8 +143,7 @@ function normalizeCloudflareMetrics(payload) {
 
 async function fetchCloudflareUsers() {
   if (!cloudflareConfig.zoneId || !cloudflareConfig.apiToken) {
-    console.warn("Cloudflare zone id or token is not configured for users metric; using fallback.");
-    return null;
+    throw new Error("Cloudflare zone id or token is not configured for users metric.");
   }
 
   const range = Number.isFinite(cloudflareConfig.days) && cloudflareConfig.days > 0 ? Math.floor(cloudflareConfig.days) : 30;
@@ -239,9 +238,13 @@ async function fetchZhouliVideoMetrics() {
           users = formatShortMetric(cloudflareUsers);
         } catch (error) {
           console.warn(`Failed to fetch Cloudflare metrics for users (${error.message}). Falling back to video metric.`);
-          users = formatShortMetric(resolveActiveUsersFromVideo(stat));
         }
-      } else {
+        if (!users) {
+          users = zhouliVideoFallback.users;
+        }
+      }
+
+      if (!users && source !== "cloudflare") {
         users = formatShortMetric(resolveActiveUsersFromVideo(stat));
       }
     }
