@@ -2,6 +2,12 @@
   <img src="./assets/profile-masthead-air.svg" alt="Aspirin0000 - SJTU Software Engineering 2027" />
 </p>
 
+<p align="center">
+  <img src="./assets/about-me-card.svg" alt="A short introduction from Hebing" />
+</p>
+
+<br />
+
 ## Tech I Use
 
 <p>
@@ -16,12 +22,6 @@
   <img alt="CMake" src="https://img.shields.io/badge/CMake-064F8C?style=flat-square&logo=cmake&logoColor=white">
   <img alt="Git" src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white">
   <img alt="Linux" src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=111111">
-</p>
-
-<br />
-
-<p align="center">
-  <img src="./assets/about-me-card.svg" alt="A short introduction from Hebing" />
 </p>
 
 <br />
