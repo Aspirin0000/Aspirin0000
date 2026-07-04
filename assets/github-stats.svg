@@ -26,7 +26,7 @@
     <text x="52" y="165" fill="#F8FAFC" font-size="22" font-weight="700">10</text>
     <rect x="156" y="122" width="104" height="52" rx="10" fill="#0B1220" stroke="#1F2937"/>
     <text x="172" y="145" fill="#94A3B8" font-size="12">Stars</text>
-    <text x="172" y="165" fill="#F8FAFC" font-size="22" font-weight="700">43</text>
+    <text x="172" y="165" fill="#F8FAFC" font-size="22" font-weight="700">44</text>
     <rect x="276" y="122" width="104" height="52" rx="10" fill="#0B1220" stroke="#1F2937"/>
     <text x="292" y="145" fill="#94A3B8" font-size="12">Forks</text>
     <text x="292" y="165" fill="#F8FAFC" font-size="22" font-weight="700">1</text>
@@ -34,5 +34,5 @@
     <text x="412" y="145" fill="#94A3B8" font-size="12">Followers</text>
     <text x="412" y="165" fill="#F8FAFC" font-size="22" font-weight="700">5</text>
   </g>
-  <text x="36" y="195" fill="#CBD5E1" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Flagship: zhouli-translator - 40 stars - updated 2026-07-04</text>
+  <text x="36" y="195" fill="#CBD5E1" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Flagship: zhouli-translator - 41 stars - updated 2026-07-04</text>
 </svg>

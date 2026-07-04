@@ -18,19 +18,19 @@
     <text x="36" y="105" fill="#E2E8F0">Go</text>
     <rect x="126" y="95" width="350" height="10" rx="5" fill="#1F2937"/>
     <rect x="126" y="95" width="173" height="10" rx="5" fill="#00ADD8"/>
-    <text x="488" y="105" fill="#CBD5E1">49.5%</text>
+    <text x="488" y="105" fill="#CBD5E1">49.4%</text>
     <text x="36" y="128" fill="#E2E8F0">Makefile</text>
     <rect x="126" y="118" width="350" height="10" rx="5" fill="#1F2937"/>
     <rect x="126" y="118" width="57" height="10" rx="5" fill="#427819"/>
-    <text x="488" y="128" fill="#CBD5E1">16.4%</text>
+    <text x="488" y="128" fill="#CBD5E1">16.3%</text>
     <text x="36" y="151" fill="#E2E8F0">C++</text>
     <rect x="126" y="141" width="350" height="10" rx="5" fill="#1F2937"/>
     <rect x="126" y="141" width="49" height="10" rx="5" fill="#F34B7D"/>
-    <text x="488" y="151" fill="#CBD5E1">14.1%</text>
+    <text x="488" y="151" fill="#CBD5E1">14.0%</text>
     <text x="36" y="174" fill="#E2E8F0">CMake</text>
     <rect x="126" y="164" width="350" height="10" rx="5" fill="#1F2937"/>
     <rect x="126" y="164" width="39" height="10" rx="5" fill="#DA3434"/>
-    <text x="488" y="174" fill="#CBD5E1">11.3%</text>
+    <text x="488" y="174" fill="#CBD5E1">11.2%</text>
     <text x="36" y="197" fill="#E2E8F0">TypeScript</text>
     <rect x="126" y="187" width="350" height="10" rx="5" fill="#1F2937"/>
     <rect x="126" y="187" width="13" height="10" rx="5" fill="#3178C6"/>
