@@ -48,7 +48,11 @@ function formatShortMetric(value) {
     return `${million}m+`;
   }
 
-  return `${Math.floor(numeric / 1000)}k+`;
+  if (numeric >= 1_000) {
+    return `${Math.floor(numeric / 1000)}k+`;
+  }
+
+  return `${Math.floor(numeric)}+`;
 }
 
 function resolveActiveUsersFromVideo(stat) {
