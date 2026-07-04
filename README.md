@@ -30,20 +30,6 @@
   <img src="./assets/zhouli-spotlight.svg" alt="合乎周礼 / Zhouli Translator" />
 </p>
 
-<p align="center">
-  <img alt="license MIT" src="https://img.shields.io/badge/license-MIT-111111?style=flat-square">
-  <a href="https://hehuzhouli.com">
-    <img alt="official hehuzhouli.com" src="https://img.shields.io/badge/official-hehuzhouli.com-8B1E1E?style=flat-square">
-  </a>
-  <a href="https://github.com/Aspirin0000/zhouli-translator">
-    <img alt="GitHub official repo" src="https://img.shields.io/badge/GitHub-official%20repo-181717?style=flat-square&logo=github">
-  </a>
-  <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white">
-  <img alt="React 19" src="https://img.shields.io/badge/React-19-149ECA?style=flat-square&logo=react&logoColor=white">
-  <img alt="TypeScript 5" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white">
-  <img alt="Cloudflare Workers" src="https://img.shields.io/badge/Cloudflare-Workers-F38020?style=flat-square&logo=cloudflareworkers&logoColor=white">
-</p>
-
 <br />
 
 <p align="center">
