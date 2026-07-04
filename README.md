@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img alt="School" src="https://img.shields.io/badge/School-Shanghai_Jiao_Tong_University-1F77B4?style=flat-square&logo=academia&logoColor=white">
+  <img alt="School" src="https://img.shields.io/badge/School-Shanghai_Jiao_Tong_University_%2F_Software_Engineering-1F77B4?style=flat-square&logo=academia&logoColor=white">
   <img alt="Graduation" src="https://img.shields.io/badge/Graduation-2027-7A1FA2?style=flat-square">
   <img alt="AI" src="https://img.shields.io/badge/Interest-AI-0EA5E9?style=flat-square&logo=openai&logoColor=white">
   <img alt="Focus" src="https://img.shields.io/badge/Focus-Backend_System-2CA02C?style=flat-square">
