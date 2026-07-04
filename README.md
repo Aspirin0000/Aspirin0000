@@ -4,14 +4,10 @@
 
 <p align="center">
   <img alt="Name" src="https://img.shields.io/badge/Name-Hebing-111111?style=flat-square">
-  <img alt="School" src="https://img.shields.io/badge/School-SJTU_Software_Engineering-1F77B4?style=flat-square&logo=graduationcap&logoColor=white">
+  <img alt="School" src="https://img.shields.io/badge/SJTU-SE-1F77B4?style=flat-square">
   <img alt="Graduation" src="https://img.shields.io/badge/Graduation-2027-7A1FA2?style=flat-square">
-  <img alt="Focus" src="https://img.shields.io/badge/Focus-Backend_%26_System_Engineering-2CA02C?style=flat-square">
-  <img alt="Project" src="https://img.shields.io/badge/Featured-合乎周礼-ff7f0e?style=flat-square">
-  <a href="https://github.com/Aspirin0000">
-    <img alt="GitHub" src="https://img.shields.io/badge/GitHub-Profile-181717?style=flat-square&logo=github">
-  </a>
-  <img alt="Stack" src="https://img.shields.io/badge/Stack-C%2B%2B_%2F_Go_%2F_TS-1f77b4?style=flat-square">
+  <img alt="Focus" src="https://img.shields.io/badge/Focus-Backend_System-2CA02C?style=flat-square">
+  <img alt="Project" src="https://img.shields.io/badge/Project-合乎周礼-ff7f0e?style=flat-square">
 </p>
 
 <br />
@@ -34,13 +30,19 @@ I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backen
   <img alt="Go" src="https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
   <img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
   <img alt="Next.js" src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white">
   <img alt="React" src="https://img.shields.io/badge/React-149ECA?style=flat-square&logo=react&logoColor=white">
   <img alt="Cloudflare Workers" src="https://img.shields.io/badge/Cloudflare%20Workers-F38020?style=flat-square&logo=cloudflareworkers&logoColor=white">
   <img alt="Qt" src="https://img.shields.io/badge/Qt-41CD52?style=flat-square&logo=qt&logoColor=white">
   <img alt="CMake" src="https://img.shields.io/badge/CMake-064F8C?style=flat-square&logo=cmake&logoColor=white">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white">
+  <img alt="Redis" src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white">
   <img alt="Git" src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white">
   <img alt="Linux" src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=111111">
+  <img alt="Nginx" src="https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white">
+  <img alt="GitHub Actions" src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white">
 </p>
 
 <br />
