@@ -21,16 +21,101 @@ const languageColors = {
   "TypeScript": "#3178C6",
 };
 
-const zhouliProjectSocial = {
+const zhouliVideoFallback = {
   plays: process.env.ZHOULI_VIDEO_PLAYS || "380k+",
   users: process.env.ZHOULI_ACTIVE_USERS || "250k+",
   likes: process.env.ZHOULI_LIKES || "50k+",
 };
 
+const zhouliVideoConfig = {
+  url: process.env.ZHOULI_VIDEO_URL || "https://www.bilibili.com/video/BV12a7N6qE1g/?share_source=copy_web&vd_source=d792c5c82b0df6f527fe842ecd9dde6c",
+  activeUsersSource: (process.env.ZHOULI_ACTIVE_USERS_SOURCE || "view").toLowerCase(),
+};
+
+function getBvidFromUrl(value) {
+  const match = String(value).match(/\bBV[0-9A-Za-z]{10,12}\b/);
+  return match ? match[0] : null;
+}
+
+function formatShortMetric(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric) || numeric < 0) {
+    return "0+";
+  }
+
+  if (numeric >= 1_000_000) {
+    const million = (numeric / 1_000_000).toFixed(1).replace(/\.0$/, "");
+    return `${million}m+`;
+  }
+
+  return `${Math.floor(numeric / 1000)}k+`;
+}
+
+function resolveActiveUsersFromVideo(stat) {
+  switch (zhouliVideoConfig.activeUsersSource) {
+    case "play":
+    case "plays":
+    case "view":
+    case "views":
+      return stat.view;
+    case "coin":
+    case "coins":
+      return stat.coin;
+    case "favorite":
+    case "favorites":
+      return stat.favorite;
+    case "danmaku":
+      return stat.danmaku;
+    case "reply":
+      return stat.reply;
+    case "like":
+    case "likes":
+      return stat.like;
+    case "share":
+    case "shares":
+      return stat.share;
+    default:
+      return stat.view;
+  }
+}
+
+async function fetchZhouliVideoMetrics() {
+  const bvid = getBvidFromUrl(zhouliVideoConfig.url);
+  if (!bvid) {
+    console.warn(`Unable to parse Bilibili BV id from: ${zhouliVideoConfig.url}`);
+    return { ...zhouliVideoFallback };
+  }
+
+  try {
+    const response = await fetch(`https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; Codex-Bot/1.0)",
+        Referer: "https://www.bilibili.com/",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Bilibili API returned ${response.status}`);
+    }
+    const payload = await response.json();
+    if (payload.code !== 0 || !payload.data?.stat) {
+      throw new Error(`Bilibili API error: ${payload.message || "unknown"}`);
+    }
+
+    const stat = payload.data.stat;
+    return {
+      plays: formatShortMetric(stat.view),
+      users: process.env.ZHOULI_ACTIVE_USERS ? process.env.ZHOULI_ACTIVE_USERS : formatShortMetric(resolveActiveUsersFromVideo(stat)),
+      likes: formatShortMetric(stat.like),
+    };
+  } catch (error) {
+    console.warn(`Failed to refresh Zhouli metrics from Bilibili (${error.message}). Using fallback values.`);
+    return { ...zhouliVideoFallback };
+  }
+}
+
 const zhouliProjectMeta = {
   title: "合乎周礼 / Zhouli Translator",
   subtitle: "AI-era Chinese style translator · prompt craft · image export · Cloudflare deploy",
-  impact: `${zhouliProjectSocial.plays} video plays · ${zhouliProjectSocial.users} active users · ${zhouliProjectSocial.likes} likes`,
 };
 
 async function github(path) {
@@ -163,7 +248,7 @@ ${rows}
 `;
 }
 
-function zhouliSpotlightSvg() {
+function zhouliSpotlightSvg(zhouliProjectSocial) {
   return `<svg width="1000" height="206" viewBox="0 0 1000 206" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">${escapeXml(zhouliProjectMeta.title)}</title>
   <desc id="desc">${escapeXml(zhouliProjectMeta.subtitle)}</desc>
@@ -179,15 +264,16 @@ function zhouliSpotlightSvg() {
   <text x="36" y="64" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="650">FEATURED WORK</text>
   <text x="36" y="103" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="31" font-weight="760">${escapeXml(zhouliProjectMeta.title)}</text>
   <text x="36" y="132" fill="#3F4B5B" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17">${escapeXml(zhouliProjectMeta.subtitle)}</text>
-  <text x="36" y="161" fill="#0969DA" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">${escapeXml(zhouliProjectMeta.impact)}</text>
+  <text x="36" y="161" fill="#0969DA" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">${escapeXml(`${zhouliProjectSocial.plays} video plays · ${zhouliProjectSocial.users} active users · ${zhouliProjectSocial.likes} likes`)}</text>
 </svg>
 `;
 }
 
 const data = await collect();
+const zhouliProjectSocial = await fetchZhouliVideoMetrics();
 await mkdir("assets", { recursive: true });
 await writeFile("assets/activity-signal.svg", githubStatsSvg(data));
 await writeFile("assets/language-mix.svg", topLanguagesSvg(data));
-await writeFile("assets/zhouli-spotlight.svg", zhouliSpotlightSvg());
-await writeFile("assets/zhouli-spotlight-minimal.svg", zhouliSpotlightSvg());
+await writeFile("assets/zhouli-spotlight.svg", zhouliSpotlightSvg(zhouliProjectSocial));
+await writeFile("assets/zhouli-spotlight-minimal.svg", zhouliSpotlightSvg(zhouliProjectSocial));
 console.log(`Generated profile cards for ${login} at ${data.generatedAt}`);

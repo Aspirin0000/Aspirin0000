@@ -25,9 +25,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_LOGIN: Aspirin0000
-          ZHOULI_VIDEO_PLAYS: "380k+"
-          ZHOULI_ACTIVE_USERS: "250k+"
-          ZHOULI_LIKES: "50k+"
+          ZHOULI_VIDEO_URL: "https://www.bilibili.com/video/BV12a7N6qE1g/?share_source=copy_web&vd_source=d792c5c82b0df6f527fe842ecd9dde6c"
+          ZHOULI_ACTIVE_USERS_SOURCE: "view"
+          # Optional: keep a manual value for users if you prefer.
+          # ZHOULI_ACTIVE_USERS: "250k+"
 
       - name: Commit refreshed cards
         run: |
