@@ -4,15 +4,12 @@
 
 ## About Me
 
-Hi, I'm Hebing, a Software Engineering undergraduate at SJTU (graduating in 2027).
+Hi, I'm Hebing — I build **reliable software with a system-first mindset**.  
+I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backend systems, API design, and deployment.
 
-I build software with a system-first mindset: from requirement modeling to architecture planning, then API and data design, and finally implementation and iteration. I like products that are small in scale but clear in scope, and I focus on making each feature measurable and maintainable.
-
-On the backend, I’m comfortable with service design and delivery workflows, including domain modeling, route and permission planning, storage interaction, and deployment. I prefer solutions that balance correctness, reliability, and extensibility.
-
-My foundation is solid in algorithms, data structures, operating systems, networking, and build/test workflows, so I can move between coding and engineering work without breaking the chain.
-
-Recently, my featured project is `合乎周礼`, an AI-era utility project that applies practical design thinking to language translation with production-minded delivery.
+- **Core strengths**: system architecture, requirements modeling, clean interfaces, scalable data flow.  
+- **Technical stack**: C++ / Go / TypeScript with practical AI + frontend integration experience.  
+- **Featured work**: `合乎周礼` — turning AI translation ideas into a production-friendly product.
 
 <br />
 
