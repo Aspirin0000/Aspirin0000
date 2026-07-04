@@ -1,0 +1,23 @@
+<svg width="1000" height="245" viewBox="0 0 1000 245" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Aspirin0000 profile masthead</title>
+  <desc id="desc">Light masthead for Aspirin0000, Hebing, SJTU Software Engineering class of 2027.</desc>
+  <defs>
+    <linearGradient id="accent" x1="64" y1="46" x2="936" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0969DA"/>
+      <stop offset="0.52" stop-color="#8250DF"/>
+      <stop offset="1" stop-color="#BF3989"/>
+    </linearGradient>
+    <linearGradient id="wash" x1="44" y1="24" x2="956" y2="221" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F8FA"/>
+      <stop offset="0.58" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFF7FB"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="999" height="244" rx="20" fill="url(#wash)" stroke="#D0D7DE"/>
+  <path d="M72 184C208 114 308 132 436 158C558 183 688 180 928 80" stroke="#D8DEE4" stroke-width="1.3"/>
+  <path d="M82 78C226 96 312 82 414 60C562 28 686 54 914 148" stroke="#EAEEF2" stroke-width="1.2"/>
+  <path d="M64 46H936" stroke="url(#accent)" stroke-width="3" stroke-linecap="round"/>
+  <text x="64" y="92" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="650">SJTU SOFTWARE ENGINEERING · 2027</text>
+  <text x="62" y="151" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="54" font-weight="780">Aspirin0000</text>
+  <text x="66" y="187" fill="#3F4B5B" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="19">AI applications, developer tools, and systems rebuilt from scratch.</text>
+</svg>
