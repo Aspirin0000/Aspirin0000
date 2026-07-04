@@ -1,17 +1,5 @@
 <p align="center">
-  <img src="./assets/profile-masthead.svg" alt="Aspirin0000 - SJTU Software Engineering 2027" />
-</p>
-
-<p align="center">
-  <a href="https://github.com/Aspirin0000">
-    <img alt="GitHub" src="https://img.shields.io/badge/GitHub-Aspirin0000-181717?style=flat-square&logo=github">
-  </a>
-  <img alt="SJTU" src="https://img.shields.io/badge/SJTU-Software%20Engineering-b91c1c?style=flat-square">
-  <img alt="2027" src="https://img.shields.io/badge/2027-undergraduate-1d4ed8?style=flat-square">
-</p>
-
-<p align="center">
-  Building AI apps, developer tools, and small systems that are easier to understand than they were to invent.
+  <img src="./assets/profile-masthead-light.svg" alt="Aspirin0000 - SJTU Software Engineering 2027" />
 </p>
 
 <p align="center">
@@ -24,31 +12,16 @@
 
 <table>
   <tr>
-    <td width="50%" valign="top">
-      <h3>合乎周礼</h3>
-      <p>AI-era Chinese style translator. Prompt craft, product surface, rate limits, image export, and Cloudflare deploy in one shipped app.</p>
+    <td valign="top">
+      <h3>合乎周礼 / Zhouli Translator</h3>
+      <p>AI-era Chinese style translator: prompt craft, image export, Cloudflare deploy.</p>
       <p>
         <a href="https://github.com/Aspirin0000/zhouli-translator">repo</a> ·
         <a href="https://hehuzhouli.com">live</a>
       </p>
     </td>
-    <td width="50%" valign="top">
-      <h3>vllm-from-scratch</h3>
-      <p>Rebuilding LLM serving ideas from first principles: KV cache, block management, scheduling, and the shape of fast inference.</p>
-      <p>
-        <a href="https://github.com/Aspirin0000/vllm-from-scratch">repo</a> ·
-        learning log
-      </p>
-    </td>
   </tr>
 </table>
-
-<p align="center">
-  <a href="https://github.com/Aspirin0000/claude-code-go">claude-code-go</a> ·
-  <a href="https://github.com/Aspirin0000/mySTL">mySTL</a> ·
-  <a href="https://github.com/Aspirin0000/QBasic">QBasic</a> ·
-  <a href="https://github.com/Aspirin0000/QLink">QLink</a>
-</p>
 
 ## Stack
 
