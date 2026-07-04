@@ -32,6 +32,12 @@ const zhouliVideoConfig = {
   activeUsersSource: (process.env.ZHOULI_ACTIVE_USERS_SOURCE || "view").toLowerCase(),
 };
 
+const cloudflareConfig = {
+  zoneId: process.env.CLOUDFLARE_ZONE_ID || process.env.CF_ZONE_ID || "",
+  apiToken: process.env.CLOUDFLARE_API_TOKEN || process.env.CF_API_TOKEN || "",
+  days: Number(process.env.CLOUDFLARE_ANALYTICS_DAYS || "30"),
+};
+
 function getBvidFromUrl(value) {
   const match = String(value).match(/\bBV[0-9A-Za-z]{10,12}\b/);
   return match ? match[0] : null;
@@ -53,6 +59,123 @@ function formatShortMetric(value) {
   }
 
   return `${Math.floor(numeric)}+`;
+}
+
+function normalizeMetricValue(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function extractNumber(obj) {
+  if (obj == null) {
+    return null;
+  }
+
+  if (typeof obj === "number") {
+    return normalizeMetricValue(obj);
+  }
+
+  if (typeof obj === "string") {
+    return normalizeMetricValue(obj);
+  }
+
+  if (typeof obj === "object") {
+    if (obj.all !== undefined) {
+      return normalizeMetricValue(obj.all);
+    }
+
+    if (obj.unique !== undefined) {
+      return normalizeMetricValue(obj.unique);
+    }
+
+    if (obj.uniques !== undefined) {
+      return normalizeMetricValue(obj.uniques);
+    }
+  }
+
+  return null;
+}
+
+function normalizeCloudflareMetrics(payload) {
+  const totals = payload?.result?.totals;
+  const timeseries = Array.isArray(payload?.result?.timeseries) ? payload.result.timeseries : [];
+
+  const candidateNumbers = [
+    totals?.uniq,
+    totals?.uniques,
+    totals?.unique,
+    totals?.uniques?.all,
+    totals?.unique?.all,
+    totals?.requests,
+    totals?.requests?.all,
+    totals?.pageViews,
+    totals?.pageViews?.all,
+  ];
+
+  for (const candidate of candidateNumbers) {
+    const number = extractNumber(candidate);
+    if (number !== null && number >= 0) {
+      return number;
+    }
+  }
+
+  if (timeseries.length > 0) {
+    const seriesValues = timeseries.map((row) => {
+      const values = [
+        extractNumber(row?.uniques?.all),
+        extractNumber(row?.uniques),
+        extractNumber(row?.requests?.all),
+        extractNumber(row?.requests),
+        extractNumber(row?.pageViews?.all),
+        extractNumber(row?.pageViews),
+      ];
+      return values.find((value) => value !== null && value >= 0) ?? 0;
+    });
+
+    const aggregated = seriesValues.reduce((sum, value) => sum + value, 0);
+    if (aggregated > 0) {
+      return aggregated;
+    }
+  }
+
+  return null;
+}
+
+async function fetchCloudflareUsers() {
+  if (!cloudflareConfig.zoneId || !cloudflareConfig.apiToken) {
+    console.warn("Cloudflare zone id or token is not configured for users metric; using fallback.");
+    return null;
+  }
+
+  const range = Number.isFinite(cloudflareConfig.days) && cloudflareConfig.days > 0 ? Math.floor(cloudflareConfig.days) : 30;
+  const now = new Date();
+  const start = new Date(now.getTime() - range * 24 * 60 * 60 * 1000);
+
+  const url = new URL(`https://api.cloudflare.com/client/v4/zones/${cloudflareConfig.zoneId}/analytics/dashboard`);
+  url.searchParams.set("since", start.toISOString());
+  url.searchParams.set("until", now.toISOString());
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${cloudflareConfig.apiToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Cloudflare API returned ${response.status}`);
+  }
+
+  const payload = await response.json();
+  if (!payload.success) {
+    throw new Error(payload.errors?.[0]?.message || "Cloudflare API error");
+  }
+
+  const users = normalizeCloudflareMetrics(payload);
+  if (users === null) {
+    throw new Error("Cloudflare response does not contain a numeric users metric");
+  }
+
+  return users;
 }
 
 function resolveActiveUsersFromVideo(stat) {
@@ -106,9 +229,26 @@ async function fetchZhouliVideoMetrics() {
     }
 
     const stat = payload.data.stat;
+    const source = zhouliVideoConfig.activeUsersSource;
+
+    let users = process.env.ZHOULI_ACTIVE_USERS;
+    if (!users) {
+      if (source === "cloudflare") {
+        try {
+          const cloudflareUsers = await fetchCloudflareUsers();
+          users = formatShortMetric(cloudflareUsers);
+        } catch (error) {
+          console.warn(`Failed to fetch Cloudflare metrics for users (${error.message}). Falling back to video metric.`);
+          users = formatShortMetric(resolveActiveUsersFromVideo(stat));
+        }
+      } else {
+        users = formatShortMetric(resolveActiveUsersFromVideo(stat));
+      }
+    }
+
     return {
       plays: formatShortMetric(stat.view),
-      users: process.env.ZHOULI_ACTIVE_USERS ? process.env.ZHOULI_ACTIVE_USERS : formatShortMetric(resolveActiveUsersFromVideo(stat)),
+      users,
       likes: formatShortMetric(stat.like),
     };
   } catch (error) {
