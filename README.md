@@ -30,7 +30,7 @@ Right now I'm focused on AI-era UX and deployment-oriented work, with `合乎周
 <br />
 
 <p align="center">
-  <img src="./assets/zhouli-spotlight.svg" alt="合乎周礼 / Zhouli Translator" />
+  <img src="./assets/zhouli-spotlight-minimal.svg" alt="合乎周礼 / Zhouli Translator" />
 </p>
 
 <br />
