@@ -63,8 +63,8 @@
 ## GitHub Activity
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=Aspirin0000&show_icons=true&hide_border=true&theme=github_dark&rank_icon=github&include_all_commits=true" alt="Aspirin0000 GitHub stats" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Aspirin0000&layout=compact&hide_border=true&theme=github_dark&langs_count=8" alt="Aspirin0000 top languages" />
+  <img height="180" src="./assets/github-stats.svg" alt="Aspirin0000 GitHub stats" />
+  <img height="180" src="./assets/top-langs.svg" alt="Aspirin0000 top languages" />
 </p>
 
 ---

@@ -1,0 +1,39 @@
+<svg width="560" height="220" viewBox="0 0 560 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Aspirin0000 top languages</title>
+  <desc id="desc">An automatically generated language distribution card for public non-fork repositories owned by Aspirin0000.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="560" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="0.58" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="560" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#020617" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="544" height="204" rx="16" fill="url(#bg)" stroke="#334155" filter="url(#shadow)"/>
+  <text x="36" y="49" fill="#F8FAFC" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700">Top Languages</text>
+  <text x="36" y="73" fill="#94A3B8" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Public non-fork repos - refreshed 2026-07-04</text>
+  <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">
+    <text x="36" y="105" fill="#E2E8F0">Go</text>
+    <rect x="126" y="95" width="350" height="10" rx="5" fill="#1F2937"/>
+    <rect x="126" y="95" width="173" height="10" rx="5" fill="#00ADD8"/>
+    <text x="488" y="105" fill="#CBD5E1">49.5%</text>
+    <text x="36" y="128" fill="#E2E8F0">Makefile</text>
+    <rect x="126" y="118" width="350" height="10" rx="5" fill="#1F2937"/>
+    <rect x="126" y="118" width="57" height="10" rx="5" fill="#427819"/>
+    <text x="488" y="128" fill="#CBD5E1">16.4%</text>
+    <text x="36" y="151" fill="#E2E8F0">C++</text>
+    <rect x="126" y="141" width="350" height="10" rx="5" fill="#1F2937"/>
+    <rect x="126" y="141" width="49" height="10" rx="5" fill="#F34B7D"/>
+    <text x="488" y="151" fill="#CBD5E1">14.1%</text>
+    <text x="36" y="174" fill="#E2E8F0">CMake</text>
+    <rect x="126" y="164" width="350" height="10" rx="5" fill="#1F2937"/>
+    <rect x="126" y="164" width="39" height="10" rx="5" fill="#DA3434"/>
+    <text x="488" y="174" fill="#CBD5E1">11.3%</text>
+    <text x="36" y="197" fill="#E2E8F0">TypeScript</text>
+    <rect x="126" y="187" width="350" height="10" rx="5" fill="#1F2937"/>
+    <rect x="126" y="187" width="13" height="10" rx="5" fill="#3178C6"/>
+    <text x="488" y="197" fill="#CBD5E1">3.7%</text>
+  </g>
+</svg>
