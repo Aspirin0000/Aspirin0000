@@ -63,8 +63,8 @@
 ## GitHub Activity
 
 <p align="center">
-  <img height="180" src="./assets/github-stats.svg" alt="Aspirin0000 GitHub stats" />
-  <img height="180" src="./assets/top-langs.svg" alt="Aspirin0000 top languages" />
+  <img width="49%" src="./assets/github-stats.svg" alt="Aspirin0000 GitHub stats" />
+  <img width="49%" src="./assets/top-langs.svg" alt="Aspirin0000 top languages" />
 </p>
 
 ---

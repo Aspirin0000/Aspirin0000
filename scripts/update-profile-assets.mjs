@@ -92,43 +92,35 @@ function githubStatsSvg(data) {
     ? `${data.flagship.name} - ${compactNumber(data.flagship.stargazers_count)} stars - updated ${data.flagship.updated_at.slice(0, 10)}`
     : "No public repositories yet";
 
-  return `<svg width="560" height="220" viewBox="0 0 560 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  return `<svg width="500" height="178" viewBox="0 0 500 178" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">${escapeXml(login)} GitHub stats</title>
   <desc id="desc">An automatically generated GitHub profile statistics card for ${escapeXml(login)}.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="560" y2="220" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0F172A"/>
-      <stop offset="0.55" stop-color="#111827"/>
-      <stop offset="1" stop-color="#1E293B"/>
+    <linearGradient id="accent" x1="20" y1="0" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0969DA"/>
+      <stop offset="0.52" stop-color="#8250DF"/>
+      <stop offset="1" stop-color="#BF3989"/>
     </linearGradient>
-    <linearGradient id="accent" x1="36" y1="37" x2="524" y2="37" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#38BDF8"/>
-      <stop offset="0.52" stop-color="#A78BFA"/>
-      <stop offset="1" stop-color="#F472B6"/>
-    </linearGradient>
-    <filter id="shadow" x="0" y="0" width="560" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#020617" flood-opacity="0.3"/>
-    </filter>
   </defs>
-  <rect x="8" y="8" width="544" height="204" rx="16" fill="url(#bg)" stroke="#334155" filter="url(#shadow)"/>
-  <rect x="36" y="36" width="488" height="3" rx="1.5" fill="url(#accent)"/>
-  <text x="36" y="71" fill="#F8FAFC" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700">GitHub Signal</text>
-  <text x="36" y="96" fill="#94A3B8" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Auto-updated daily from GitHub API - ${escapeXml(data.generatedAt)}</text>
+  <rect x="0.5" y="0.5" width="499" height="177" rx="8" fill="#FFFFFF" stroke="#D0D7DE"/>
+  <rect x="20" y="20" width="460" height="3" rx="1.5" fill="url(#accent)"/>
+  <text x="20" y="50" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">GitHub Signal</text>
+  <text x="20" y="70" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">Auto-updated daily from GitHub API - ${escapeXml(data.generatedAt)}</text>
   <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
-    <rect x="36" y="122" width="104" height="52" rx="10" fill="#0B1220" stroke="#1F2937"/>
-    <text x="52" y="145" fill="#94A3B8" font-size="12">Public repos</text>
-    <text x="52" y="165" fill="#F8FAFC" font-size="22" font-weight="700">${compactNumber(data.user.public_repos)}</text>
-    <rect x="156" y="122" width="104" height="52" rx="10" fill="#0B1220" stroke="#1F2937"/>
-    <text x="172" y="145" fill="#94A3B8" font-size="12">Stars</text>
-    <text x="172" y="165" fill="#F8FAFC" font-size="22" font-weight="700">${compactNumber(data.stars)}</text>
-    <rect x="276" y="122" width="104" height="52" rx="10" fill="#0B1220" stroke="#1F2937"/>
-    <text x="292" y="145" fill="#94A3B8" font-size="12">Forks</text>
-    <text x="292" y="165" fill="#F8FAFC" font-size="22" font-weight="700">${compactNumber(data.forks)}</text>
-    <rect x="396" y="122" width="128" height="52" rx="10" fill="#0B1220" stroke="#1F2937"/>
-    <text x="412" y="145" fill="#94A3B8" font-size="12">Followers</text>
-    <text x="412" y="165" fill="#F8FAFC" font-size="22" font-weight="700">${compactNumber(data.user.followers)}</text>
+    <rect x="20" y="91" width="106" height="48" rx="6" fill="#F6F8FA" stroke="#D8DEE4"/>
+    <text x="34" y="112" fill="#57606A" font-size="11">Public repos</text>
+    <text x="34" y="132" fill="#24292F" font-size="21" font-weight="700">${compactNumber(data.user.public_repos)}</text>
+    <rect x="137" y="91" width="106" height="48" rx="6" fill="#F6F8FA" stroke="#D8DEE4"/>
+    <text x="151" y="112" fill="#57606A" font-size="11">Stars</text>
+    <text x="151" y="132" fill="#24292F" font-size="21" font-weight="700">${compactNumber(data.stars)}</text>
+    <rect x="254" y="91" width="106" height="48" rx="6" fill="#F6F8FA" stroke="#D8DEE4"/>
+    <text x="268" y="112" fill="#57606A" font-size="11">Forks</text>
+    <text x="268" y="132" fill="#24292F" font-size="21" font-weight="700">${compactNumber(data.forks)}</text>
+    <rect x="371" y="91" width="109" height="48" rx="6" fill="#F6F8FA" stroke="#D8DEE4"/>
+    <text x="385" y="112" fill="#57606A" font-size="11">Followers</text>
+    <text x="385" y="132" fill="#24292F" font-size="21" font-weight="700">${compactNumber(data.user.followers)}</text>
   </g>
-  <text x="36" y="195" fill="#CBD5E1" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Flagship: ${escapeXml(flagship)}</text>
+  <text x="20" y="158" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">Flagship: ${escapeXml(flagship)}</text>
 </svg>
 `;
 }
@@ -137,31 +129,21 @@ function topLanguagesSvg(data) {
   const total = data.languages.reduce((sum, item) => sum + item.bytes, 0);
   const top = data.languages.slice(0, 5);
   const rows = top.map((item, index) => {
-    const y = 105 + index * 23;
+    const y = 86 + index * 20;
     const percentage = total ? item.bytes / total : 0;
-    const width = Math.max(4, Math.round(350 * percentage));
-    return `    <text x="36" y="${y}" fill="#E2E8F0">${escapeXml(item.name)}</text>
-    <rect x="126" y="${y - 10}" width="350" height="10" rx="5" fill="#1F2937"/>
-    <rect x="126" y="${y - 10}" width="${width}" height="10" rx="5" fill="${item.color}"/>
-    <text x="488" y="${y}" fill="#CBD5E1">${(percentage * 100).toFixed(1)}%</text>`;
+    const width = Math.max(4, Math.round(250 * percentage));
+    return `    <text x="20" y="${y}" fill="#24292F">${escapeXml(item.name)}</text>
+    <rect x="115" y="${y - 9}" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
+    <rect x="115" y="${y - 9}" width="${width}" height="9" rx="4.5" fill="${item.color}"/>
+    <text x="382" y="${y}" fill="#57606A">${(percentage * 100).toFixed(1)}%</text>`;
   }).join("\n");
 
-  return `<svg width="560" height="220" viewBox="0 0 560 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  return `<svg width="500" height="178" viewBox="0 0 500 178" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">${escapeXml(login)} top languages</title>
   <desc id="desc">An automatically generated language distribution card for public non-fork repositories owned by ${escapeXml(login)}.</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="560" y2="220" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#111827"/>
-      <stop offset="0.58" stop-color="#0F172A"/>
-      <stop offset="1" stop-color="#172554"/>
-    </linearGradient>
-    <filter id="shadow" x="0" y="0" width="560" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#020617" flood-opacity="0.3"/>
-    </filter>
-  </defs>
-  <rect x="8" y="8" width="544" height="204" rx="16" fill="url(#bg)" stroke="#334155" filter="url(#shadow)"/>
-  <text x="36" y="49" fill="#F8FAFC" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700">Top Languages</text>
-  <text x="36" y="73" fill="#94A3B8" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Public non-fork repos - refreshed ${escapeXml(data.generatedAt)}</text>
+  <rect x="0.5" y="0.5" width="499" height="177" rx="8" fill="#FFFFFF" stroke="#D0D7DE"/>
+  <text x="20" y="33" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">Top Languages</text>
+  <text x="20" y="53" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">Public non-fork repos - refreshed ${escapeXml(data.generatedAt)}</text>
   <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">
 ${rows}
   </g>
