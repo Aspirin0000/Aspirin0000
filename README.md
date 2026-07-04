@@ -2,9 +2,12 @@
   <img src="./assets/profile-masthead-air.svg" alt="Aspirin0000 - SJTU Software Engineering 2027" />
 </p>
 
-<p align="center">
-  <img src="./assets/about-me-card.svg" alt="A short introduction from Hebing" />
-</p>
+## About Me
+
+Hi, I'm Hebing. I'm a Software Engineering undergraduate at SJTU, graduating in 2027.
+
+I prefer building practical, weirdly specific ideas into small but useful products.  
+Right now I'm focused on AI-era UX and deployment-oriented work, with `合乎周礼` as my featured project.
 
 <br />
 
