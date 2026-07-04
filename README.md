@@ -9,8 +9,6 @@
   <img alt="Focus" src="https://img.shields.io/badge/Focus-Backend_System-2CA02C?style=flat-square">
 </p>
 
-<br />
-
 ## About Me
 
 **Hi, I'm Hebing** — I build reliable systems with a system-first mindset.  
