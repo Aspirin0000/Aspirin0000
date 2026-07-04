@@ -1,6 +1,6 @@
 <svg width="1000" height="206" viewBox="0 0 1000 206" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">合乎周礼 / Zhouli Translator</title>
-  <desc id="desc">Spotlight card for Zhouli Translator, an AI-era Chinese style translator.</desc>
+  <desc id="desc">AI-era Chinese style translator · prompt craft · image export · Cloudflare deploy</desc>
   <defs>
     <linearGradient id="accent" x1="36" y1="28" x2="964" y2="28" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0969DA"/>

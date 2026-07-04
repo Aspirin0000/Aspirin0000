@@ -21,6 +21,12 @@ const languageColors = {
   "TypeScript": "#3178C6",
 };
 
+const zhouliProjectMeta = {
+  title: "合乎周礼 / Zhouli Translator",
+  subtitle: "AI-era Chinese style translator · prompt craft · image export · Cloudflare deploy",
+  impact: "Social impact: 200k+ plays · 20k+ likes · 30k+ engaged users",
+};
+
 async function github(path) {
   const response = await fetch(`https://api.github.com${path}`, { headers });
   if (!response.ok) {
@@ -151,8 +157,31 @@ ${rows}
 `;
 }
 
+function zhouliSpotlightSvg() {
+  return `<svg width="1000" height="206" viewBox="0 0 1000 206" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">${escapeXml(zhouliProjectMeta.title)}</title>
+  <desc id="desc">${escapeXml(zhouliProjectMeta.subtitle)}</desc>
+  <defs>
+    <linearGradient id="accent" x1="36" y1="28" x2="964" y2="28" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0969DA"/>
+      <stop offset="0.48" stop-color="#8250DF"/>
+      <stop offset="1" stop-color="#BF3989"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="999" height="205" rx="14" fill="#FFFFFF" stroke="#D0D7DE"/>
+  <path d="M36 28H964" stroke="url(#accent)" stroke-width="3" stroke-linecap="round"/>
+  <text x="36" y="64" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="650">FEATURED WORK</text>
+  <text x="36" y="103" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="31" font-weight="760">${escapeXml(zhouliProjectMeta.title)}</text>
+  <text x="36" y="132" fill="#3F4B5B" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17">${escapeXml(zhouliProjectMeta.subtitle)}</text>
+  <text x="36" y="161" fill="#0969DA" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">${escapeXml(zhouliProjectMeta.impact)}</text>
+</svg>
+`;
+}
+
 const data = await collect();
 await mkdir("assets", { recursive: true });
 await writeFile("assets/activity-signal.svg", githubStatsSvg(data));
 await writeFile("assets/language-mix.svg", topLanguagesSvg(data));
+await writeFile("assets/zhouli-spotlight.svg", zhouliSpotlightSvg());
+await writeFile("assets/zhouli-spotlight-minimal.svg", zhouliSpotlightSvg());
 console.log(`Generated profile cards for ${login} at ${data.generatedAt}`);
