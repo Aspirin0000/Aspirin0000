@@ -18,7 +18,7 @@ I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backen
 
 **Core strengths:** architecture design, requirements modeling, clean interfaces, scalable data flow.  
 **Technical base:** C++ / Go / TypeScript, with practical AI + frontend integration experience.  
-**Featured:** `合乎周礼` — an AI translation project with production-minded delivery.
+**Featured:** `合乎周礼` — an AI translation project with production-minded delivery, gaining **hundreds of thousands of views** and **tens of thousands of likes** on social platforms, with **tens of thousands of users** engaged.
 
 <br />
 
