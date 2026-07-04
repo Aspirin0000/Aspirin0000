@@ -7,23 +7,23 @@
   <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">
     <text x="20" y="86" fill="#24292F">Go</text>
     <rect x="115" y="77" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="77" width="123" height="9" rx="4.5" fill="#00ADD8"/>
-    <text x="382" y="86" fill="#57606A">49.4%</text>
-    <text x="20" y="106" fill="#24292F">Makefile</text>
+    <rect x="115" y="77" width="193" height="9" rx="4.5" fill="#00ADD8"/>
+    <text x="382" y="86" fill="#57606A">77.1%</text>
+    <text x="20" y="106" fill="#24292F">C++</text>
     <rect x="115" y="97" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="97" width="41" height="9" rx="4.5" fill="#427819"/>
-    <text x="382" y="106" fill="#57606A">16.3%</text>
-    <text x="20" y="126" fill="#24292F">C++</text>
+    <rect x="115" y="97" width="31" height="9" rx="4.5" fill="#F34B7D"/>
+    <text x="382" y="106" fill="#57606A">12.6%</text>
+    <text x="20" y="126" fill="#24292F">TypeScript</text>
     <rect x="115" y="117" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="117" width="35" height="9" rx="4.5" fill="#F34B7D"/>
-    <text x="382" y="126" fill="#57606A">14.0%</text>
-    <text x="20" y="146" fill="#24292F">CMake</text>
+    <rect x="115" y="117" width="14" height="9" rx="4.5" fill="#3178C6"/>
+    <text x="382" y="126" fill="#57606A">5.8%</text>
+    <text x="20" y="146" fill="#24292F">CSS</text>
     <rect x="115" y="137" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="137" width="28" height="9" rx="4.5" fill="#DA3434"/>
-    <text x="382" y="146" fill="#57606A">11.2%</text>
-    <text x="20" y="166" fill="#24292F">TypeScript</text>
+    <rect x="115" y="137" width="6" height="9" rx="4.5" fill="#663399"/>
+    <text x="382" y="146" fill="#57606A">2.5%</text>
+    <text x="20" y="166" fill="#24292F">JavaScript</text>
     <rect x="115" y="157" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="157" width="9" height="9" rx="4.5" fill="#3178C6"/>
-    <text x="382" y="166" fill="#57606A">3.7%</text>
+    <rect x="115" y="157" width="4" height="9" rx="4.5" fill="#F1E05A"/>
+    <text x="382" y="166" fill="#57606A">1.4%</text>
   </g>
 </svg>
