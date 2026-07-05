@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const login = process.env.GITHUB_LOGIN || "Aspirin0000";
 const token = process.env.GITHUB_TOKEN;
@@ -442,6 +442,7 @@ async function fetchZhouliVideoMetrics() {
 const zhouliProjectMeta = {
   title: "合乎周礼 / Zhouli Translator",
   subtitle: "AI-era Chinese style translator · prompt craft · image export · Cloudflare deploy",
+  featuredLine: `**Featured:** \`合乎周礼\` — AI-era Chinese translator with production-minded delivery. Current impact: **{plays} video plays**, **{users} active users**, **{likes} likes**.`,
 };
 
 async function github(path) {
@@ -597,9 +598,38 @@ function zhouliSpotlightSvg(zhouliProjectSocial) {
 
 const data = await collect();
 const zhouliProjectSocial = await fetchZhouliVideoMetrics();
+await updateReadmeFeaturedLine(zhouliProjectSocial);
 await mkdir("assets", { recursive: true });
 await writeFile("assets/activity-signal.svg", githubStatsSvg(data));
 await writeFile("assets/language-mix.svg", topLanguagesSvg(data));
 await writeFile("assets/zhouli-spotlight.svg", zhouliSpotlightSvg(zhouliProjectSocial));
 await writeFile("assets/zhouli-spotlight-minimal.svg", zhouliSpotlightSvg(zhouliProjectSocial));
 console.log(`Generated profile cards for ${login} at ${data.generatedAt}`);
+
+async function updateReadmeFeaturedLine(zhouliProjectSocial) {
+  try {
+    const readmePath = "README.md";
+    const source = await readFile(readmePath, "utf8");
+    const nextLine = zhouliProjectMeta.featuredLine
+      .replace("{plays}", zhouliProjectSocial.plays)
+      .replace("{users}", zhouliProjectSocial.users)
+      .replace("{likes}", zhouliProjectSocial.likes);
+
+    const lines = source.split("\n");
+    const nextLines = lines.map((line) => {
+      if (line.includes("**Featured:**") && line.includes("Current impact:")) {
+        return nextLine;
+      }
+      return line;
+    });
+
+    const nextContent = nextLines.join("\n");
+    if (nextContent === source) {
+      return;
+    }
+
+    await writeFile(readmePath, nextContent);
+  } catch (error) {
+    console.warn(`Failed to sync README featured line (${error.message}).`);
+  }
+}
