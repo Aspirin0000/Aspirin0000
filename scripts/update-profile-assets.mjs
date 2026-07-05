@@ -442,7 +442,7 @@ async function fetchZhouliVideoMetrics() {
 const zhouliProjectMeta = {
   title: "合乎周礼 / Zhouli Translator",
   subtitle: "AI-era Chinese style translator · prompt craft · image export · Cloudflare deploy",
-  featuredLine: `**Featured:** \`合乎周礼\` — AI-era Chinese translator with production-minded delivery. Current impact: **{plays} video plays**, **{users} active users**, **{likes} likes**.`,
+  featuredLine: `**Featured:** \`合乎周礼\` — AI-era Chinese translator with production-minded delivery. Current impact: **{plays} video plays**, **{users} page views**, **{likes} likes**.`,
 };
 
 async function github(path) {
@@ -591,7 +591,7 @@ function zhouliSpotlightSvg(zhouliProjectSocial) {
   <text x="36" y="64" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="650">FEATURED WORK</text>
   <text x="36" y="103" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="31" font-weight="760">${escapeXml(zhouliProjectMeta.title)}</text>
   <text x="36" y="132" fill="#3F4B5B" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17">${escapeXml(zhouliProjectMeta.subtitle)}</text>
-  <text x="36" y="161" fill="#0969DA" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">${escapeXml(`${zhouliProjectSocial.plays} video plays · ${zhouliProjectSocial.users} active users · ${zhouliProjectSocial.likes} likes`)}</text>
+  <text x="36" y="161" fill="#0969DA" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700">${escapeXml(`${zhouliProjectSocial.plays} video plays · ${zhouliProjectSocial.users} page views · ${zhouliProjectSocial.likes} likes`)}</text>
 </svg>
 `;
 }
