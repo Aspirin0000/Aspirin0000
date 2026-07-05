@@ -39,6 +39,8 @@ const cloudflareConfig = {
   analyticsStartDate: process.env.CLOUDFLARE_ANALYTICS_START_DATE || "",
 };
 
+class RequiredCloudflareMetricError extends Error {}
+
 function getBvidFromUrl(value) {
   const match = String(value).match(/\bBV[0-9A-Za-z]{10,12}\b/);
   return match ? match[0] : null;
@@ -218,7 +220,7 @@ async function postCloudflareGraphQL(query) {
 
 async function fetchCloudflareUsers() {
   if (!cloudflareConfig.zoneId || !cloudflareConfig.apiToken) {
-    throw new Error("Cloudflare zone id or token is not configured for users metric.");
+    throw new Error("Cloudflare zone id or token is not configured for page views metric.");
   }
 
   const requestedRange = Number.isFinite(cloudflareConfig.days) && cloudflareConfig.days > 0 ? Math.floor(cloudflareConfig.days) : 30;
@@ -261,7 +263,7 @@ async function fetchCloudflareUsers() {
       return legacyTotal;
     }
 
-    throw new Error(`Cloudflare query from ${formatGraphQLDate(startDate)} to ${endDate} returned no usable user metric.`);
+    throw new Error(`Cloudflare query from ${formatGraphQLDate(startDate)} to ${endDate} returned no usable page views metric.`);
   }
 
   while (true) {
@@ -340,7 +342,7 @@ async function fetchCloudflareUsers() {
       }
 
       if (total <= 0) {
-        throw new Error("Cloudflare response does not contain a numeric users metric");
+        throw new Error("Cloudflare response does not contain a numeric page views metric");
       }
 
       return total;
@@ -416,7 +418,7 @@ async function fetchZhouliVideoMetrics() {
           const cloudflareUsers = await fetchCloudflareUsers();
           users = formatShortMetric(cloudflareUsers);
         } catch (error) {
-          console.warn(`Failed to fetch Cloudflare metrics for users (${error.message}). Falling back to video metric.`);
+          throw new RequiredCloudflareMetricError(`Failed to fetch Cloudflare page views (${error.message}).`);
         }
         if (!users) {
           users = zhouliVideoFallback.users;
@@ -434,6 +436,9 @@ async function fetchZhouliVideoMetrics() {
       likes: formatShortMetric(stat.like),
     };
   } catch (error) {
+    if (error instanceof RequiredCloudflareMetricError) {
+      throw error;
+    }
     console.warn(`Failed to refresh Zhouli metrics from Bilibili (${error.message}). Using fallback values.`);
     return { ...zhouliVideoFallback };
   }
