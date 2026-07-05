@@ -615,6 +615,7 @@ async function updateReadmeFeaturedLine(zhouliProjectSocial) {
   try {
     const readmePath = "README.md";
     const source = await readFile(readmePath, "utf8");
+    const spotlightSrc = `./assets/zhouli-spotlight-minimal.svg?v=${readmeAssetCacheKey(zhouliProjectSocial)}`;
     const nextLine = zhouliProjectMeta.featuredLine
       .replace("{plays}", zhouliProjectSocial.plays)
       .replace("{users}", zhouliProjectSocial.users)
@@ -624,6 +625,9 @@ async function updateReadmeFeaturedLine(zhouliProjectSocial) {
     const nextLines = lines.map((line) => {
       if (line.includes("**Featured:**") && line.includes("Current impact:")) {
         return nextLine;
+      }
+      if (line.includes("assets/zhouli-spotlight-minimal.svg")) {
+        return line.replace(/src="\.\/assets\/zhouli-spotlight-minimal\.svg(?:\?[^"]*)?"/, `src="${spotlightSrc}"`);
       }
       return line;
     });
@@ -637,4 +641,11 @@ async function updateReadmeFeaturedLine(zhouliProjectSocial) {
   } catch (error) {
     console.warn(`Failed to sync README featured line (${error.message}).`);
   }
+}
+
+function readmeAssetCacheKey(zhouliProjectSocial) {
+  return [zhouliProjectSocial.plays, zhouliProjectSocial.users, zhouliProjectSocial.likes]
+    .map((value) => String(value).toLowerCase().replace(/[^a-z0-9]+/g, ""))
+    .filter(Boolean)
+    .join("-");
 }
