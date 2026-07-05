@@ -33,8 +33,8 @@ const zhouliVideoConfig = {
 };
 
 const cloudflareConfig = {
-  zoneId: process.env.CLOUDFLARE_ZONE_ID || process.env.CF_ZONE_ID || "",
-  apiToken: process.env.CLOUDFLARE_API_TOKEN || process.env.CF_API_TOKEN || "",
+  zoneId: (process.env.CLOUDFLARE_ZONE_ID || process.env.CF_ZONE_ID || "").trim(),
+  apiToken: (process.env.CLOUDFLARE_API_TOKEN || process.env.CF_API_TOKEN || "").trim(),
   days: Number(process.env.CLOUDFLARE_ANALYTICS_DAYS || "30"),
   analyticsStartDate: process.env.CLOUDFLARE_ANALYTICS_START_DATE || "",
 };
