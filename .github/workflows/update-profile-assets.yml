@@ -36,13 +36,13 @@ jobs:
 
       - name: Commit refreshed cards
         run: |
-          if [ -z "$(git status --porcelain assets/*.svg)" ]; then
+          if [ -z "$(git status --porcelain README.md assets/*.svg)" ]; then
             echo "No profile card changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/*.svg
+          git add README.md assets/*.svg
           git commit -m "Update generated profile cards"
           git fetch origin main
           git pull --rebase origin main
