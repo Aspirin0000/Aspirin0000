@@ -25,8 +25,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_LOGIN: Aspirin0000
-          ZHOULI_VIDEO_URL: "https://www.bilibili.com/video/BV12a7N6qE1g/?share_source=copy_web&vd_source=d792c5c82b0df6f527fe842ecd9dde6c"
+          ZHOULI_VIDEO_URL: "https://www.bilibili.com/video/BV12a7N6qE1g/"
           ZHOULI_ACTIVE_USERS_SOURCE: "cloudflare"
+          CLOUDFLARE_ANALYTICS_START_DATE: "06-22"
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ANALYTICS_DAYS: "30"

@@ -28,7 +28,7 @@ const zhouliVideoFallback = {
 };
 
 const zhouliVideoConfig = {
-  url: process.env.ZHOULI_VIDEO_URL || "https://www.bilibili.com/video/BV12a7N6qE1g/?share_source=copy_web&vd_source=d792c5c82b0df6f527fe842ecd9dde6c",
+  url: process.env.ZHOULI_VIDEO_URL || "https://www.bilibili.com/video/BV12a7N6qE1g/",
   activeUsersSource: (process.env.ZHOULI_ACTIVE_USERS_SOURCE || "view").toLowerCase(),
 };
 
@@ -36,6 +36,7 @@ const cloudflareConfig = {
   zoneId: process.env.CLOUDFLARE_ZONE_ID || process.env.CF_ZONE_ID || "",
   apiToken: process.env.CLOUDFLARE_API_TOKEN || process.env.CF_API_TOKEN || "",
   days: Number(process.env.CLOUDFLARE_ANALYTICS_DAYS || "30"),
+  analyticsStartDate: process.env.CLOUDFLARE_ANALYTICS_START_DATE || "",
 };
 
 function getBvidFromUrl(value) {
@@ -96,6 +97,33 @@ function extractNumber(obj) {
   return null;
 }
 
+function parseCloudflareStartDate(value, referenceDate) {
+  const text = String(value || "").trim();
+  if (!text) {
+    return null;
+  }
+
+  let parsed = null;
+
+  if (/^\d{1,2}[./-]\d{1,2}$/.test(text)) {
+    const [month, day] = text.split(/[./-]/).map(Number);
+    if (Number.isInteger(month) && Number.isInteger(day) && month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+      const year = referenceDate.getUTCFullYear();
+      parsed = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
+    }
+  } else {
+    parsed = new Date(text);
+  }
+
+  if (!parsed || Number.isNaN(parsed.getTime())) {
+    return null;
+  }
+
+  const normalized = new Date(parsed);
+  normalized.setUTCHours(0, 0, 0, 0);
+  return normalized;
+}
+
 function formatGraphQLDate(date) {
   return date.toISOString().slice(0, 10);
 }
@@ -117,8 +145,8 @@ function normalizeCloudflareMetric(payload) {
       const sum = entry?.sum;
       const candidates = [
         extractNumber(sum?.visits),
-        extractNumber(sum?.requests),
         extractNumber(sum?.pageViews),
+        extractNumber(sum?.requests),
         extractNumber(entry?.uniques),
         extractNumber(entry?.uniq),
       ];
@@ -194,24 +222,58 @@ async function fetchCloudflareUsers() {
   }
 
   const requestedRange = Number.isFinite(cloudflareConfig.days) && cloudflareConfig.days > 0 ? Math.floor(cloudflareConfig.days) : 30;
-  const retentionFallbackRange = Math.min(requestedRange, 7);
+  const explicitStart = parseCloudflareStartDate(cloudflareConfig.analyticsStartDate, new Date());
+  if (cloudflareConfig.analyticsStartDate && !explicitStart) {
+    console.warn(`Invalid CLOUDFLARE_ANALYTICS_START_DATE "${cloudflareConfig.analyticsStartDate}". Falling back to CLOUDFLARE_ANALYTICS_DAYS=${requestedRange}.`);
+  }
+
+  const retentionFallbackRange = explicitStart ? 1 : Math.min(requestedRange, 7);
   let range = requestedRange;
   const now = new Date();
   const endExclusive = new Date(now);
   endExclusive.setUTCHours(0, 0, 0, 0);
   endExclusive.setUTCDate(endExclusive.getUTCDate() + 1);
   const endDate = formatGraphQLDate(endExclusive);
+  const startDate = explicitStart && explicitStart < endExclusive ? explicitStart : null;
+  const rangeFromStart = startDate ? Math.max(1, Math.floor((endExclusive.getTime() - startDate.getTime()) / 86400000)) : requestedRange;
+
+  if (startDate) {
+    const query = `
+      query {
+        viewer {
+          zones(filter: { zoneTag: "${cloudflareConfig.zoneId}" }) {
+            httpRequests1dGroups(
+              limit: ${Math.max(2, rangeFromStart)}
+              filter: { date_geq: "${formatGraphQLDate(startDate)}", date_lt: "${endDate}" }
+            ) {
+              sum {
+                pageViews
+                requests
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const legacyTotal = await postCloudflareGraphQL(query).then((payload) => normalizeCloudflareMetric(payload));
+    if (legacyTotal && legacyTotal > 0) {
+      return legacyTotal;
+    }
+
+    throw new Error(`Cloudflare query from ${formatGraphQLDate(startDate)} to ${endDate} returned no usable user metric.`);
+  }
 
   while (true) {
-    let cursor = new Date(endExclusive);
-    cursor.setUTCDate(cursor.getUTCDate() - range);
-
+    const cursorStart = new Date(endExclusive);
+    cursorStart.setUTCDate(cursorStart.getUTCDate() - range);
     const dayPayloads = [];
-    while (formatGraphQLDate(cursor) < endDate) {
-      const dayStart = new Date(cursor);
+
+    while (formatGraphQLDate(cursorStart) < endDate) {
+      const dayStart = new Date(cursorStart);
       const dayEnd = nextUtcDay(dayStart);
       dayPayloads.push({ dayStart, dayEnd });
-      cursor = dayEnd;
+      cursorStart.setUTCDate(cursorStart.getUTCDate() + 1);
     }
 
     if (dayPayloads.length === 0) {
