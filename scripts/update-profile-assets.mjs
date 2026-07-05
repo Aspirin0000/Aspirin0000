@@ -96,49 +96,96 @@ function extractNumber(obj) {
   return null;
 }
 
-function normalizeCloudflareMetrics(payload) {
-  const totals = payload?.result?.totals;
-  const timeseries = Array.isArray(payload?.result?.timeseries) ? payload.result.timeseries : [];
+function formatGraphQLDate(date) {
+  return date.toISOString().slice(0, 10);
+}
 
-  const candidateNumbers = [
-    totals?.uniq,
-    totals?.uniques,
-    totals?.unique,
-    totals?.uniques?.all,
-    totals?.unique?.all,
-    totals?.requests,
-    totals?.requests?.all,
-    totals?.pageViews,
-    totals?.pageViews?.all,
-  ];
+function nextUtcDay(date) {
+  const next = new Date(date);
+  next.setUTCDate(next.getUTCDate() + 1);
+  return next;
+}
 
-  for (const candidate of candidateNumbers) {
-    const number = extractNumber(candidate);
-    if (number !== null && number >= 0) {
-      return number;
-    }
+function normalizeCloudflareMetric(payload) {
+  const series = payload?.data?.viewer?.zones?.[0]?.httpRequests1dGroups;
+  if (!Array.isArray(series)) {
+    return null;
   }
 
-  if (timeseries.length > 0) {
-    const seriesValues = timeseries.map((row) => {
-      const values = [
-        extractNumber(row?.uniques?.all),
-        extractNumber(row?.uniques),
-        extractNumber(row?.requests?.all),
-        extractNumber(row?.requests),
-        extractNumber(row?.pageViews?.all),
-        extractNumber(row?.pageViews),
+  const totals = series
+    .map((entry) => {
+      const sum = entry?.sum;
+      const candidates = [
+        extractNumber(sum?.visits),
+        extractNumber(sum?.requests),
+        extractNumber(sum?.pageViews),
+        extractNumber(entry?.uniques),
+        extractNumber(entry?.uniq),
       ];
-      return values.find((value) => value !== null && value >= 0) ?? 0;
-    });
+      return candidates.find((value) => value !== null && value >= 0) ?? 0;
+    })
+    .filter((value) => value > 0);
 
-    const aggregated = seriesValues.reduce((sum, value) => sum + value, 0);
-    if (aggregated > 0) {
-      return aggregated;
-    }
+  if (totals.length === 0) {
+    return null;
   }
 
-  return null;
+  const aggregated = totals.reduce((sum, value) => sum + value, 0);
+  return aggregated > 0 ? aggregated : null;
+}
+
+function normalizeCloudflareVisitsPayload(payload) {
+  const series = payload?.data?.viewer?.zones?.[0]?.series;
+  if (!Array.isArray(series)) {
+    return null;
+  }
+
+  const totals = series
+    .map((entry) => {
+      const sum = entry?.sum;
+      if (!sum) {
+        return 0;
+      }
+
+      const candidates = [
+        extractNumber(sum.visits),
+        extractNumber(sum.requests),
+        extractNumber(sum.edgeResponseBytes),
+        extractNumber(entry?.count),
+        extractNumber(sum.pageViews),
+      ];
+      return candidates.find((value) => value !== null && value >= 0) ?? 0;
+    })
+    .filter((value) => value > 0);
+
+  if (totals.length === 0) {
+    return null;
+  }
+
+  return totals.reduce((sum, value) => sum + value, 0);
+}
+
+async function postCloudflareGraphQL(query) {
+  const response = await fetch("https://api.cloudflare.com/client/v4/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${cloudflareConfig.apiToken}`,
+    },
+    body: JSON.stringify({ query }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Cloudflare API returned ${response.status}: ${body}`);
+  }
+
+  const payload = await response.json();
+  if (payload.errors?.length > 0) {
+    throw new Error(payload.errors[0]?.message || "Cloudflare GraphQL returned an error");
+  }
+
+  return payload;
 }
 
 async function fetchCloudflareUsers() {
@@ -146,35 +193,105 @@ async function fetchCloudflareUsers() {
     throw new Error("Cloudflare zone id or token is not configured for users metric.");
   }
 
-  const range = Number.isFinite(cloudflareConfig.days) && cloudflareConfig.days > 0 ? Math.floor(cloudflareConfig.days) : 30;
+  const requestedRange = Number.isFinite(cloudflareConfig.days) && cloudflareConfig.days > 0 ? Math.floor(cloudflareConfig.days) : 30;
+  const retentionFallbackRange = Math.min(requestedRange, 7);
+  let range = requestedRange;
   const now = new Date();
-  const start = new Date(now.getTime() - range * 24 * 60 * 60 * 1000);
+  const endExclusive = new Date(now);
+  endExclusive.setUTCHours(0, 0, 0, 0);
+  endExclusive.setUTCDate(endExclusive.getUTCDate() + 1);
+  const endDate = formatGraphQLDate(endExclusive);
 
-  const url = new URL(`https://api.cloudflare.com/client/v4/zones/${cloudflareConfig.zoneId}/analytics/dashboard`);
-  url.searchParams.set("since", start.toISOString());
-  url.searchParams.set("until", now.toISOString());
+  while (true) {
+    let cursor = new Date(endExclusive);
+    cursor.setUTCDate(cursor.getUTCDate() - range);
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${cloudflareConfig.apiToken}`,
-    },
-  });
+    const dayPayloads = [];
+    while (formatGraphQLDate(cursor) < endDate) {
+      const dayStart = new Date(cursor);
+      const dayEnd = nextUtcDay(dayStart);
+      dayPayloads.push({ dayStart, dayEnd });
+      cursor = dayEnd;
+    }
 
-  if (!response.ok) {
-    throw new Error(`Cloudflare API returned ${response.status}`);
+    if (dayPayloads.length === 0) {
+      throw new Error("Cloudflare metrics range resolved to zero days.");
+    }
+
+    const requests = dayPayloads.map((batch) => {
+      const query = `
+        query {
+          viewer {
+            zones(filter: { zoneTag: "${cloudflareConfig.zoneId}" }) {
+              series: httpRequestsAdaptiveGroups(
+                limit: 1000
+                filter: {
+                  requestSource: "eyeball"
+                  datetime_geq: "${formatGraphQLDate(batch.dayStart)}T00:00:00Z"
+                  datetime_lt: "${formatGraphQLDate(batch.dayEnd)}T00:00:00Z"
+                }
+              ) {
+                sum {
+                  visits
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      return postCloudflareGraphQL(query);
+    });
+
+    try {
+      const responses = await Promise.all(requests);
+      const total = responses.reduce((sum, payload) => {
+        const value = normalizeCloudflareVisitsPayload(payload);
+        return sum + (value ?? 0);
+      }, 0);
+
+      if (total <= 0 && dayPayloads.length > 0) {
+        const rangeStart = dayPayloads[0].dayStart;
+        const fallbackRangeStart = formatGraphQLDate(rangeStart);
+        const fallbackRangeEnd = endDate;
+        const query = `
+          query {
+            viewer {
+              zones(filter: { zoneTag: "${cloudflareConfig.zoneId}" }) {
+                httpRequests1dGroups(
+                  limit: ${dayPayloads.length}
+                  filter: { date_geq: "${fallbackRangeStart}", date_lt: "${fallbackRangeEnd}" }
+                ) {
+                  sum {
+                    pageViews
+                    requests
+                  }
+                }
+              }
+            }
+          }
+        `;
+        const legacy = await postCloudflareGraphQL(query).then((payload) => normalizeCloudflareMetric(payload));
+        if (legacy && legacy > 0) {
+          return legacy;
+        }
+      }
+
+      if (total <= 0) {
+        throw new Error("Cloudflare response does not contain a numeric users metric");
+      }
+
+      return total;
+    } catch (error) {
+      if (range > retentionFallbackRange && /cannot request data older than/i.test(error.message)) {
+        range = retentionFallbackRange;
+        console.warn(`Cloudflare query range ${requestedRange}d exceeds available analytics retention. Retrying with ${range}d.`);
+        continue;
+      }
+
+      throw error;
+    }
   }
-
-  const payload = await response.json();
-  if (!payload.success) {
-    throw new Error(payload.errors?.[0]?.message || "Cloudflare API error");
-  }
-
-  const users = normalizeCloudflareMetrics(payload);
-  if (users === null) {
-    throw new Error("Cloudflare response does not contain a numeric users metric");
-  }
-
-  return users;
 }
 
 function resolveActiveUsersFromVideo(stat) {
