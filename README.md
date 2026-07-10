@@ -16,7 +16,7 @@ I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backen
 
 **Core strengths:** architecture design, requirements modeling, clean interfaces, scalable data flow.  
 **Technical base:** C++ / Go / TypeScript, with practical AI + frontend integration experience.  
-**Featured:** `合乎周礼` — AI-era Chinese translator with production-minded delivery. Current impact: **534k+ video plays**, **424k+ page views**, **55k+ likes**.
+**Featured:** `合乎周礼` — AI-era Chinese translator with production-minded delivery. Current impact: **554k+ video plays**, **426k+ page views**, **56k+ likes**.
 
 ## Tech I Use
 
@@ -42,7 +42,7 @@ I’m a Software Engineering undergraduate at **SJTU (2027)**, focused on backen
 </p>
 
 <p align="center">
-  <img src="./assets/zhouli-spotlight-minimal.svg?v=534k-424k-55k" alt="合乎周礼 / Zhouli Translator" />
+  <img src="./assets/zhouli-spotlight-minimal.svg?v=554k-426k-56k" alt="合乎周礼 / Zhouli Translator" />
 </p>
 
 <p align="center">
