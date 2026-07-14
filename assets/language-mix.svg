@@ -8,7 +8,7 @@
     <text x="20" y="86" fill="#24292F">Go</text>
     <rect x="115" y="77" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
     <rect x="115" y="77" width="149" height="9" rx="4.5" fill="#00ADD8"/>
-    <text x="382" y="86" fill="#57606A">59.7%</text>
+    <text x="382" y="86" fill="#57606A">59.6%</text>
     <text x="20" y="106" fill="#24292F">C++</text>
     <rect x="115" y="97" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
     <rect x="115" y="97" width="24" height="9" rx="4.5" fill="#F34B7D"/>
@@ -24,6 +24,6 @@
     <text x="20" y="166" fill="#24292F">TypeScript</text>
     <rect x="115" y="157" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
     <rect x="115" y="157" width="17" height="9" rx="4.5" fill="#3178C6"/>
-    <text x="382" y="166" fill="#57606A">6.7%</text>
+    <text x="382" y="166" fill="#57606A">6.8%</text>
   </g>
 </svg>
