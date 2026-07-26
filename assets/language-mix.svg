@@ -7,23 +7,23 @@
   <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">
     <text x="20" y="86" fill="#24292F">Go</text>
     <rect x="115" y="77" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="77" width="148" height="9" rx="4.5" fill="#00ADD8"/>
-    <text x="382" y="86" fill="#57606A">59.2%</text>
-    <text x="20" y="106" fill="#24292F">C++</text>
+    <rect x="115" y="77" width="143" height="9" rx="4.5" fill="#00ADD8"/>
+    <text x="382" y="86" fill="#57606A">57.3%</text>
+    <text x="20" y="106" fill="#24292F">TypeScript</text>
     <rect x="115" y="97" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="97" width="24" height="9" rx="4.5" fill="#F34B7D"/>
-    <text x="382" y="106" fill="#57606A">9.6%</text>
-    <text x="20" y="126" fill="#24292F">Python</text>
+    <rect x="115" y="97" width="26" height="9" rx="4.5" fill="#3178C6"/>
+    <text x="382" y="106" fill="#57606A">10.2%</text>
+    <text x="20" y="126" fill="#24292F">C++</text>
     <rect x="115" y="117" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="117" width="23" height="9" rx="4.5" fill="#94A3B8"/>
-    <text x="382" y="126" fill="#57606A">9.4%</text>
-    <text x="20" y="146" fill="#24292F">TypeScript</text>
+    <rect x="115" y="117" width="23" height="9" rx="4.5" fill="#F34B7D"/>
+    <text x="382" y="126" fill="#57606A">9.3%</text>
+    <text x="20" y="146" fill="#24292F">Python</text>
     <rect x="115" y="137" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
-    <rect x="115" y="137" width="19" height="9" rx="4.5" fill="#3178C6"/>
-    <text x="382" y="146" fill="#57606A">7.4%</text>
+    <rect x="115" y="137" width="23" height="9" rx="4.5" fill="#94A3B8"/>
+    <text x="382" y="146" fill="#57606A">9.1%</text>
     <text x="20" y="166" fill="#24292F">JavaScript</text>
     <rect x="115" y="157" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
     <rect x="115" y="157" width="17" height="9" rx="4.5" fill="#F1E05A"/>
-    <text x="382" y="166" fill="#57606A">6.9%</text>
+    <text x="382" y="166" fill="#57606A">6.7%</text>
   </g>
 </svg>
