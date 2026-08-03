@@ -3,7 +3,7 @@
   <desc id="desc">An automatically generated language distribution card for public non-fork repositories owned by Aspirin0000.</desc>
   <rect x="0.5" y="0.5" width="499" height="177" rx="8" fill="#FFFFFF" stroke="#D0D7DE"/>
   <text x="20" y="33" fill="#24292F" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">Top Languages</text>
-  <text x="20" y="53" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">Public non-fork repos - refreshed 2026-08-02</text>
+  <text x="20" y="53" fill="#57606A" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">Public non-fork repos - refreshed 2026-08-03</text>
   <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="12">
     <text x="20" y="86" fill="#24292F">Go</text>
     <rect x="115" y="77" width="250" height="9" rx="4.5" fill="#EAEEF2"/>
